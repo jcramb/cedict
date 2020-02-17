@@ -39,7 +39,7 @@ install:
   - go mod verify
 
 script:
-  - make test
+  - go test -race -v -covermode atomic -coverprofile=profile.cov ./...
   - $(go env GOPATH)/bin/goveralls -service=travis-ci
 
 notifications:

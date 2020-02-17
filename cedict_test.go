@@ -232,6 +232,28 @@ func TestMetadata(t *testing.T) {
 	}
 }
 
+func TestLoadInvalid(t *testing.T) {
+	tests := map[string]string{
+		"#! version=\n":                 "expected number",
+		"#! subversion=abc\n":           "expected number",
+		"#! entries=a1 \n":              "expected number",
+		"#! date=2020-0214T06:15:46Z\n": "expected RFC3339",
+		"#! entries=1\n":                "loaded entries (0)",
+		"% % [pa1 /percent (Tw)/\n":     "unmarshal: ",
+	}
+	for s, wantErr := range tests {
+		r := strings.NewReader(s)
+		d, err := Parse(r)
+		if err == nil || !strings.Contains(err.Error(), wantErr) {
+			var md Metadata
+			if d != nil {
+				md = d.Metadata()
+			}
+			t.Errorf("got '%v', want '%s'\n%v", err, wantErr, md)
+		}
+	}
+}
+
 func TestEntry(t *testing.T) {
 
 	equal := func(s string, e *Entry) error {
@@ -335,6 +357,16 @@ func TestLevenshtein(t *testing.T) {
 				i, test.src, test.dst, n, test.want)
 		}
 	}
+}
+
+func ExampleDict_getByPinyin() {
+	d := New()
+	elements := d.GetByPinyin("mei guo ren")
+	for _, e := range elements {
+		fmt.Printf("%s - %s\n", e.Traditional, FixSymbolSpaces(PinyinTones(e.Pinyin)))
+	}
+	// Output:
+	// 美國人 - Měi guó rén
 }
 
 func ExampleDict_hanziToPinyin() {
