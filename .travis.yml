@@ -14,12 +14,14 @@ go:
   - master
 
 os:
+  - windows
   - linux
   - osx
 
 jobs:
   allow_failures:
     - go: master
+    - os: windows
   fast_finish: true
 
 cache:

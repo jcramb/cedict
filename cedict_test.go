@@ -337,7 +337,7 @@ func TestLevenshtein(t *testing.T) {
 	}
 }
 
-func ExampleDict_HanziToPinyin() {
+func ExampleDict_hanziToPinyin() {
 	d := New()
 	hans := "你喜歡學中文嗎？"
 	fmt.Printf("%s (plaintext) '%s'\n", hans, PinyinPlaintext(d.HanziToPinyin(hans)))
