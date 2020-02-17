@@ -1,0 +1,45 @@
+env:
+  global:
+    - CACHE_NAME=${TRAVIS_ARCH}
+    - GO111MODULE=on
+    - GOPROXY=https://proxy.golang.org
+
+git:
+  depth: false
+
+language: go
+go:
+  - "1.12.16"
+  - "1.13.7"
+  - master
+
+os:
+  - linux
+  - osx
+
+jobs:
+  allow_failures:
+    - go: master
+  fast_finish: true
+
+cache:
+  directories:
+    - $HOME/gopath/pkg/mod
+    - $HOME/.cache/go-build
+    - $HOME/Library/Caches/go-build
+    - $HOME/AppData/Local/go-build
+    
+before-install:
+  - go get github.com/mattn/goveralls
+
+install:
+  - go mod download
+  - go mod verify
+
+script:
+  - make test
+  - $(go env GOPATH)/bin/goveralls -service=travis-ci
+
+notifications:
+  email:
+  - jcramb@gmail.com
