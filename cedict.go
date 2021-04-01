@@ -725,7 +725,7 @@ func min(x, y, z int) int {
 	return z
 }
 
-var vowels = "AaEeiOouü"
+var vowels = "AaEeiOouür"
 
 var toneNums = "12345"
 
@@ -739,6 +739,7 @@ var mapNumToTone = map[rune][]rune{
 	'o': []rune("ōóǒòo"),
 	'u': []rune("ūúǔùu"),
 	'ü': []rune("ǖǘǚǜü"),
+	'r': []rune("rrrrr"),
 }
 
 var mapToneToNum = map[rune]string{
