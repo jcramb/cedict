@@ -666,9 +666,10 @@ func FixSymbolSpaces(s string) string {
 // vowel in the string, as a guess for which gets the tone.
 func guessToneIndex(s string) int {
 	for _, r := range vowels {
-		i := strings.IndexRune(s, r)
-		if i >= 0 {
-			return i
+		byteIndex := strings.IndexRune(s, r)
+		if byteIndex >= 0 {
+			runeIndex := len([]rune(s[0:byteIndex]))
+			return runeIndex
 		}
 	}
 	return -1

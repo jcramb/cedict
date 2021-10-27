@@ -317,6 +317,7 @@ func TestHanziToPinyin(t *testing.T) {
 		"":   "",
 		"  ": "",
 		"画儿": "Huà r",
+		"省略": "Shěng lüè",
 		"人民银行旁边一行人abc字母【路牌】，平行宇宙发行股票。": "Rén mín yín háng páng biān yī xíng rén abc zì mǔ [lù pái], píng xíng yǔ zhòu fā xíng gǔ piào.",
 		"我的大王！": "Wǒ de dà wáng!",
 		//"你好。我饿了。":       "Nǐ hǎo. Wǒ èle.",
