@@ -9,7 +9,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/jcramb/cedict"
+	"github.com/Destaq/cedict"
 )
 
 func main() {
