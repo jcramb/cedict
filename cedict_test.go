@@ -72,6 +72,17 @@ func TestHanzi(t *testing.T) {
 	}
 }
 
+func TestAllHanzi(t *testing.T) {
+	d := New()
+	elements := d.GetAllByHanzi("听")
+	if len(elements) != 2 {
+		t.Fail()
+	}
+	for _, e := range elements {
+		t.Logf("AllHanzi:  %s\n", e.Marshal())
+	}
+}
+
 func TestPinyin(t *testing.T) {
 	d := New()
 
@@ -379,8 +390,8 @@ func ExampleDict_hanziToPinyin() {
 	fmt.Printf("%s (tones)     '%s'\n", hans, FixSymbolSpaces(PinyinTones(d.HanziToPinyin(hans))))
 	// Output:
 	// 你喜歡學中文嗎？ (plaintext) 'Ni xi huan xue zhong wen ma ?'
-	// 你喜歡學中文嗎？ (tonenums)  'Ni3 xi3 huan5 xue2 zhong1 wen2 ma3 ?'
-	// 你喜歡學中文嗎？ (tones)     'Nǐ xǐ huan xué zhōng wén mǎ?'
+	// 你喜歡學中文嗎？ (tonenums)  'Ni3 xi3 huan5 xue2 zhong1 wen2 ma2 ?'
+	// 你喜歡學中文嗎？ (tones)     'Nǐ xǐ huan xué zhōng wén má?'
 }
 
 func BenchmarkHanziToPinyin(b *testing.B) {

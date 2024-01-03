@@ -314,6 +314,20 @@ func (d *Dict) GetByHanzi(s string) *Entry {
 	return nil
 }
 
+// GetAllByHanzi returns all the Dict entries that match the hanzi.
+// Supports input using traditional or simplified characters.
+func (d *Dict) GetAllByHanzi(s string) []*Entry {
+	d.lazyLoad()
+	s = strings.TrimSpace(s)
+	var results []*Entry
+	for _, e := range d.e {
+		if e.Traditional == s || e.Simplified == s {
+			results = append(results, e)
+		}
+	}
+	return results
+}
+
 // GetByPinyin returns hanzi matching the given pinyin string.
 // Supports pinyin in plaintext or with tones/tone numbers.
 // With plaintext, all tone variations are considered matching.
