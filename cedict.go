@@ -53,6 +53,7 @@ var (
 // By default, the latest version will be downloaded on creation.
 type Dict struct {
 	e      []*Entry
+	eMap   map[string][]*Entry
 	md     Metadata
 	ready  chan bool
 	header []string
@@ -154,6 +155,17 @@ func Parse(r io.Reader) (*Dict, error) {
 			return nil, errors.Wrap(err, "unmarshal: "+line)
 		}
 		d.e = append(d.e, e)
+
+		if _, ok := d.eMap[e.Traditional]; !ok {
+			d.eMap[e.Traditional] = make([]*Entry, 0)
+		}
+		if _, ok := d.eMap[e.Simplified]; !ok {
+			d.eMap[e.Simplified] = make([]*Entry, 0)
+		}
+		d.eMap[e.Traditional] = append(d.eMap[e.Traditional], e)
+		if e.Traditional != e.Simplified {
+			d.eMap[e.Simplified] = append(d.eMap[e.Simplified], e)
+		}
 	}
 
 	// validate header entry count
@@ -233,6 +245,7 @@ func New() *Dict {
 func newDict() *Dict {
 	return &Dict{
 		ready: make(chan bool),
+		eMap:  make(map[string][]*Entry),
 	}
 }
 
@@ -306,11 +319,11 @@ func (d *Dict) Metadata() Metadata {
 func (d *Dict) GetByHanzi(s string) *Entry {
 	d.lazyLoad()
 	s = strings.TrimSpace(s)
-	for _, e := range d.e {
-		if e.Traditional == s || e.Simplified == s {
-			return e
-		}
+
+	if _, ok := d.eMap[s]; ok {
+		return d.eMap[s][0]
 	}
+
 	return nil
 }
 
@@ -473,6 +486,7 @@ func (d *Dict) lazyLoad() {
 
 		// populate dict
 		d.e = dict.e
+		d.eMap = dict.eMap
 		d.md = dict.md
 		d.header = dict.header
 
