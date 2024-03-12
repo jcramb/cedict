@@ -1,4 +1,4 @@
-module github.com/jcramb/cedict
+module github.com/Ecostack/cedict
 
 go 1.13
 
