@@ -65,10 +65,36 @@ func TestHanzi(t *testing.T) {
 	}
 
 	e := d.GetByHanzi("中文")
-	if e != nil {
-		t.Logf("ByHanzi:   %s\n", e.Marshal())
-	} else if e.Meanings[0] != "Chinese language" {
+	if e == nil {
+		t.Errorf("no entry found")
+	}
+
+	t.Logf("ByHanzi:   %s\n", e.Marshal())
+	if e.Meanings[0] != "Chinese language" {
 		t.Fail()
+	}
+}
+
+func TestHanziMultiple(t *testing.T) {
+	d := New()
+
+	if IsHanzi("我的大王！") != true {
+		t.Errorf("我的大王！ is hanzi")
+	}
+
+	e := d.GetAllByHanzi("好处")
+	if len(e) != 2 {
+		t.Errorf("got %d (want 2)", len(e))
+	}
+	if e[0] == nil || e[1] == nil {
+		t.Errorf("no entry found")
+	}
+
+	if e[0].Meanings[0] != "easy to get along with" {
+		t.Errorf("got '%s' (want 'easy to get along with')", e[0].Meanings[0])
+	}
+	if e[1].Meanings[0] != "benefit; advantage; merit" {
+		t.Errorf("got '%s' (want 'benefit; advantage; merit')", e[1].Meanings[0])
 	}
 }
 
@@ -379,8 +405,8 @@ func ExampleDict_hanziToPinyin() {
 	fmt.Printf("%s (tones)     '%s'\n", hans, FixSymbolSpaces(PinyinTones(d.HanziToPinyin(hans))))
 	// Output:
 	// 你喜歡學中文嗎？ (plaintext) 'Ni xi huan xue zhong wen ma ?'
-	// 你喜歡學中文嗎？ (tonenums)  'Ni3 xi3 huan5 xue2 zhong1 wen2 ma3 ?'
-	// 你喜歡學中文嗎？ (tones)     'Nǐ xǐ huan xué zhōng wén mǎ?'
+	// 你喜歡學中文嗎？ (tonenums)  'Ni3 xi3 huan5 xue2 zhong1 wen2 ma2 ?'
+	// 你喜歡學中文嗎？ (tones)     'Nǐ xǐ huan xué zhōng wén má?'
 }
 
 func BenchmarkHanziToPinyin(b *testing.B) {
