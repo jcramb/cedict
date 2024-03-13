@@ -43,4 +43,4 @@ script:
 
 notifications:
   email:
-  - jcramb@gmail.com
+  - sebastian@ecostack.dev

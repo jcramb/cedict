@@ -1,9 +1,9 @@
 # `cedict` 漢英詞典Go軟件包
 
-[![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](https://godoc.org/github.com/jcramb/cedict)
-[![Go Report Card](https://goreportcard.com/badge/github.com/jcramb/cedict?style=flat-square)](https://goreportcard.com/report/github.com/jcramb/cedict)
-[![Build Status](https://img.shields.io/travis/jcramb/cedict/master?style=flat-square)](https://travis-ci.org/jcramb/cedict)
-[![Coveralls](https://img.shields.io/coveralls/github/jcramb/cedict/master?style=flat-square)](https://coveralls.io/github/jcramb/cedict)
+[![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](https://godoc.org/github.com/Ecostack/cedict)
+[![Go Report Card](https://goreportcard.com/badge/github.com/jcramb/cedict?style=flat-square)](https://goreportcard.com/report/github.com/Ecostack/cedict)
+[![Build Status](https://img.shields.io/travis/jcramb/cedict/master?style=flat-square)](https://travis-ci.org/Ecostack/cedict)
+[![Coveralls](https://img.shields.io/coveralls/github/jcramb/cedict/master?style=flat-square)](https://coveralls.io/github/Ecostack/cedict)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE) 
 
 # Overview 
@@ -21,12 +21,12 @@ The basic format of a CEDICT entry is:
 # Install
 First grab the latest version of the package,
 
-    go get -u github.com/jcramb/cedict
+    go get -u github.com/Ecostack/cedict
 
 Next, include it in your application:
 
 ```go
-import "github.com/jcramb/cedict"
+import "github.com/Ecostack/cedict"
 ```
 
 # Getting Started
@@ -49,6 +49,7 @@ fmt.Printf("%s\n", cedict.PinyinTones(d.HanziToPinyin("你好，世界！")))
 ## License
 
 Copyright 2020 John Cramb. All rights reserved.
+Copyright 2024 Sebastian Scheibe. All rights reserved.
 
-Licensed under the MIT License. See [LICENSE](https://github.com/jcramb/cedict/blob/master/LICENSE) in the project root for license information.
+Licensed under the MIT License. See [LICENSE](https://github.com/Ecostack/cedict/blob/master/LICENSE) in the project root for license information.
 

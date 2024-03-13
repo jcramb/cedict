@@ -1,4 +1,5 @@
 // Copyright 2020 John Cramb. All rights reserved.
+// Copyright 2024 Sebastian Scheibe. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root
 // for license information.
 

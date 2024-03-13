@@ -12,7 +12,7 @@ GOLIST = $(shell $(GO) list ./... | grep -v vendor)
 CMD = cedict
 
 # src
-REPO  = github.com/jcramb/cedict
+REPO  = github.com/Ecostack/cedict
 LDFLAGS= -ldflags="-s -w"
 
 .PHONY: all
