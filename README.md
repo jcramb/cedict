@@ -1,9 +1,8 @@
-# `cedict` 漢英詞典Go軟件包
+# `cedict` Chinese-English Dictionary Go Package - 漢英詞典Go軟件包 - 汉英词典Go软件包
 
 [![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](https://godoc.org/github.com/Ecostack/cedict)
-[![Go Report Card](https://goreportcard.com/badge/github.com/jcramb/cedict?style=flat-square)](https://goreportcard.com/report/github.com/Ecostack/cedict)
-[![Build Status](https://img.shields.io/travis/jcramb/cedict/master?style=flat-square)](https://travis-ci.org/Ecostack/cedict)
-[![Coveralls](https://img.shields.io/coveralls/github/jcramb/cedict/master?style=flat-square)](https://coveralls.io/github/Ecostack/cedict)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Ecostack/cedict?style=flat-square)](https://goreportcard.com/report/github.com/Ecostack/cedict)
+[![Coveralls](https://img.shields.io/coveralls/github/Ecostack/cedict/master?style=flat-square)](https://coveralls.io/github/Ecostack/cedict)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE) 
 
 # Overview 
@@ -31,9 +30,88 @@ import "github.com/Ecostack/cedict"
 
 # Getting Started
 
+## Hanzi to Pinyin
+
 ```go
-d := cedict.New()
-fmt.Printf("%s\n", cedict.PinyinTones(d.HanziToPinyin("你好，世界！")))
+package main
+
+import (
+	"fmt"
+	"log"
+	"github.com/Ecostack/cedict" // replace with your module path
+)
+
+func main() {
+	dict := cedict.New()
+
+	pinyin := dict.HanziToPinyin("龙豆")
+	fmt.Println("Pinyin for 龙豆 is:", pinyin)
+}
+```
+
+## Finding Entry by Hanzi
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+	"github.com/Ecostack/cedict" // replace with your module path
+)
+
+func main() {
+	dict := cedict.New()
+	
+	entry := dict.GetByHanzi("龙")
+	if entry != nil {
+		fmt.Printf("Found entry for 龙: %+v\n", entry)
+	} else {
+		fmt.Println("Entry for 龙 not found.")
+	}
+}
+```
+
+## Finding Entries by Hanzi
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+	"github.com/Ecostack/cedict" // replace with your module path
+)
+
+func main() {
+	dict := cedict.New()
+
+	entries := dict.GetAllByHanzi("龙")
+	for _, entry := range entries {
+        fmt.Printf("Found entry: %+v\n", entry)
+    }
+}
+```
+
+## Searching by Pinyin
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+	"github.com/Ecostack/cedict" // replace with your module path
+)
+
+func main() {
+	dict := cedict.New()
+
+	entries := dict.GetByPinyin("long2")
+	for _, entry := range entries {
+		fmt.Printf("Found entry: %+v\n", entry)
+	}
+}
 ```
 
 # Contributing

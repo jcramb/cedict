@@ -1,4 +1,5 @@
 # Copyright 2020 John Cramb. All rights reserved.
+# Copyright 2024 Sebastian Scheibe. All rights reserved.
 # Licensed under the MIT License. See LICENSE in the project root
 # for license information.
 
@@ -15,14 +16,11 @@ CMD = cedict
 REPO  = github.com/Ecostack/cedict
 LDFLAGS= -ldflags="-s -w"
 
-.PHONY: all
 all: install cedict
 
-.PHONY: install
 install: 
 	$(GO) install $(LDFLAGS) ./...
 
-.PHONY: build
 build: 
 	$(GO) build $(LDFLAGS) ./...
 
@@ -30,23 +28,18 @@ build:
 $(CMD):
 	$(GO) build $(LDFLAGS) ./cmd/$@
 
-.PHONY: fmt
 fmt:
 	$(GO) fmt ./...
 
-.PHONY: vet
 vet:
 	$(GO) vet ./...
 
-.PHONY: lint
 lint: $(GOLINT)
 	$(GOLINT) .
 
-.PHONY: test
 test:
 	$(GO) test -race -v -covermode atomic -coverprofile=profile.cov ./...
 
-.PHONY: clean
 clean:
 	rm -f $(CMD)
 	rm -rf ./testdata
